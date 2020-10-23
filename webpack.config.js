@@ -17,13 +17,33 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                test: /\.styl$/,
+                use: [
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                    },
+                    {
+                        loader: 'stylus-loader',
+                        options: {
+                            stylusOptions: {
+                                compress: true,
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.html$/i,
                 loader: 'html-loader',
-            }
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
+            },
         ],
     },
     plugins: [
