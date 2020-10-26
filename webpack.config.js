@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -12,43 +13,44 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
-        contentBase: './dist',
+        historyApiFallback: true,
+        contentBase: path.resolve(__dirname, './dist'),
+        open: true,
+        compress: true,
+        hot: true,
+        port: 8080,
     },
     module: {
         rules: [
-            {
-                test: /\.styl$/,
-                use: [
-                    {
-                        loader: 'style-loader',
-                    },
-                    {
-                        loader: 'css-loader',
-                    },
-                    {
-                        loader: 'stylus-loader',
-                        options: {
-                            stylusOptions: {
-                                compress: true,
-                            },
-                        },
-                    },
-                ],
-            },
-            {
-                test: /\.html$/i,
-                loader: 'html-loader',
-            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
+            {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader',
+                ],
+            },
+            {
+                test: /\.html$/i,
+                loader: 'html-loader',
+            }
         ],
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin(),
-        new MiniCssExtractPlugin()
+        new HtmlWebpackPlugin({
+            title: "Кинопортал"
+        }),
+        new MiniCssExtractPlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ]
 };

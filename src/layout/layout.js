@@ -1,10 +1,12 @@
 import html from "./index.html";
 import "./style.scss";
-class LoginForm {
-    constructor() {
+class Layout {
+    constructor(child) {
+        this.header = header
     }
 
     render() {
+        this.header.render()
         const container = document.createElement("div");
         container.innerHTML = html;
 
@@ -12,4 +14,4 @@ class LoginForm {
     }
 }
 
-export default LoginForm;
+export default Layout;

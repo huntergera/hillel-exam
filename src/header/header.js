@@ -1,6 +1,6 @@
 import html from "./index.html";
 import "./style.scss";
-class LoginForm {
+class Header {
     constructor() {
     }
 
@@ -12,4 +12,4 @@ class LoginForm {
     }
 }
 
-export default LoginForm;
+export default Header;
