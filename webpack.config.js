@@ -48,7 +48,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            title: "Кинопортал"
+            template: "./src/index.ejs"
         }),
         new MiniCssExtractPlugin(),
         new webpack.HotModuleReplacementPlugin()

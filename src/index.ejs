@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Мир Кино</title>
+  </head>
+  <body class="bg-light">
+    <div class="container d-flex flex-column shadow-sm bg-white">
+      <%= require('./header/index.html') %>
+      <main id="content" class="d-flex flex-wrap justify-content-around align-items-start align-content-start">
+        <%= require('./welcome-component/index.html') %>
+      </main>
+      <footer class="text-center my-5">
+        <%= require('./footer/index.html') %>
+      </footer>
+    </div>
+  </body>
+</html>
