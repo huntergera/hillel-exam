@@ -1,12 +1,14 @@
 import html from "./index.html";
 import "./style.scss";
+import {renderTemplate} from "../../template-utils";
+
 class WelcomeComponent {
     constructor() {
+        this.welcomeComponent = renderTemplate(html)
     }
 
     render() {
-        const container = document.createElement("div");
-        container.innerHTML = html;
+        return this.welcomeComponent;
     }
 }
 
