@@ -19,7 +19,6 @@ const footer = new Footer();
 footer.render();
 
 const listMovie = new ListMovie();
-listMovie.render();
 
 const history = getHistory();
 const mainContentWrapper = document.querySelector("#content");
@@ -31,8 +30,13 @@ function renderRoute(path) {
             break;
         case "/list":
             let dfbg = listMovie.render();
-            console.log(listMovie.render())
-            mainContentWrapper.innerHTML = dfbg ;
+            console.log(dfbg)
+
+            const container = document.createElement("div");
+            container.innerHTML = dfbg;
+            mainContentWrapper.innerHTML = "";
+
+            mainContentWrapper.appendChild(container.firstChild);
             break;
         case "/products":
             mainContentWrapper.innerText = "PRODUCTS";
@@ -45,7 +49,6 @@ function renderRoute(path) {
 
 
 history.listen(listener => {
-    console.log("LISTEN", listener);
     renderRoute(listener.location.pathname);
 });
 
