@@ -1,10 +1,9 @@
-<ul>
-    <span><%-title%></span>
-    <% users.forEach(function(user) { %>
-        <li>
-            <span><%-user.name%></span>
-            <span><%-user.birthDate%></span>
-        </li>
+
+
+<menu>
+  <ul>
+    <% links.forEach(function(link) { %>
+    <li><a href=<%-link.href%>><%-link.name%></a></li>
     <% }); %>
-    <button data-id="submitButtonId">SUBMIT</button>
-</ul>
+  </ul>
+</menu>
