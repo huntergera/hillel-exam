@@ -48,7 +48,8 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: "./src/template.ejs"
+            template: "./src/template.html",
+            favicon: "./src/assets/favicon.ico"
         }),
         new MiniCssExtractPlugin(),
         new webpack.HotModuleReplacementPlugin()

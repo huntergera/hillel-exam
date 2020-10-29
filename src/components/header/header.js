@@ -8,18 +8,18 @@ const history = getHistory();
 class Header {
     constructor() {
         this.header = renderTemplate(html);
-        this.allFilmsButton = document.querySelector(".all-movies")
     }
 
     allFilmsOnClick(event) {
-        if (event.target.tagName !== "A") return;
+        if (event.target.classList.contains("all-movies")){
+            event.preventDefault();
+            history.push(event.target.href);
+        }
 
-        event.preventDefault();
-        history.push(event.target.href);
     }
 
     render() {
-        this.allFilmsButton.addEventListener("click", this.allFilmsOnClick.bind(this));
+        this.header.addEventListener("click", this.allFilmsOnClick.bind(this));
         return this.header;
     }
 }
