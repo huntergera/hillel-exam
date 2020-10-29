@@ -9,8 +9,6 @@ import Header from "./components/header/header";
 import WelcomeComponent from "./components/welcome-component/welcome-component";
 import Footer from "./components/footer/footer";
 import ListMovie from "./components/list-movie/list-movie";
-//import Menu from "./components/list/list";
-import LoginForm from "./components/login-form/login-form";
 
 const container = document.querySelector(".container");
 const mainWrapper = document.createElement("main");
@@ -25,29 +23,21 @@ const welcomeComponent = new WelcomeComponent();
 mainWrapper.appendChild(welcomeComponent.render());
 
 const listMovie = new ListMovie();
-mainWrapper.appendChild(listMovie.render());
-
-// const menu = new Menu();
-// mainWrapper.appendChild(menu.render());
 
 const footer = new Footer();
 container.appendChild(footer.render());
-
-//listMovie.render();
 
 const history = getHistory();
 
 function renderRoute(path) {
     switch (path) {
         case "/":
-            mainWrapper.innerText = "";
-            container.appendChild(footer.render());
+            mainWrapper.innerHTML = "";
+            mainWrapper.appendChild(welcomeComponent.render());
             break;
         case "/list":
             mainWrapper.innerHTML = "";
-            break;
-        case "/products":
-            mainWrapper.innerText = "PRODUCTS";
+            mainWrapper.appendChild(listMovie.render());
             break;
         default:
             mainWrapper.innerText = "404";
@@ -55,10 +45,12 @@ function renderRoute(path) {
     }
 }
 
-
 history.listen(listener => {
     renderRoute(listener.location.pathname);
 });
+
+renderRoute(history.location.pathname);
+
 
 // const form = new LoginForm();
 // console.log(container)

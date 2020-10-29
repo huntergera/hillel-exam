@@ -6,11 +6,10 @@ import movies from "../../movies.json"
 class ListMovie {
     constructor() {
         this.listMovie = renderTemplate(html, { movies } );
-        console.log(this.listMovie)
     }
 
     render() {
-        return this.listMovie;
+        return this.listMovie
     }
 }
 

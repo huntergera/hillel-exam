@@ -11,11 +11,10 @@ class Header {
     }
 
     allFilmsOnClick(event) {
-        if (event.target.classList.contains("all-movies")){
+        if (event.target.dataset.id = "all-movies"){
             event.preventDefault();
             history.push(event.target.href);
         }
-
     }
 
     render() {
