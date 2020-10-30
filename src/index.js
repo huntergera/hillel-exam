@@ -9,6 +9,8 @@ import Header from "./components/header/header";
 import WelcomeComponent from "./components/welcome-component/welcome-component";
 import Footer from "./components/footer/footer";
 import ListMovie from "./components/list-movie/list-movie";
+import Movie from "./components/movie/movie";
+import ModalForm from "./components/modal-form/modal-form";
 
 const container = document.querySelector(".container");
 const mainWrapper = document.createElement("main");
@@ -48,9 +50,13 @@ function renderRoute(path) {
 history.listen(listener => {
     renderRoute(listener.location.pathname);
 });
-
 renderRoute(history.location.pathname);
 
+const movie = new Movie();
+container.appendChild(movie.render());
+
+const modalForm = new ModalForm();
+container.appendChild(modalForm.render());
 
 // const form = new LoginForm();
 // console.log(container)

@@ -1,7 +1,14 @@
-header {
-	margin-right: -15px;
-	margin-left: -15px;
+.card-title {
+	padding-right: 60px;
 }
-.search:hover svg {
-	fill: #ffffff;
+.card-footer {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0.5rem 0.75rem;
+	border: 0;
+}
+.card-footer .btn {
+	width: 32px;
+	height: 32px;
 }

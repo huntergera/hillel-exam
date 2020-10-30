@@ -1,4 +1,5 @@
 import html from "./index.html";
+import $ from 'jquery';
 import "./style.scss";
 import {renderTemplate} from "../../template-utils";
 import { getHistory } from "../../app-history";
