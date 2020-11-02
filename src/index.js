@@ -5,10 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { getHistory } from "./app-history";
 
 import "./assets/style.scss";
+import movies from "./movies.json";
+
 import Header from "./components/header/header";
 import WelcomeComponent from "./components/welcome-component/welcome-component";
 import Footer from "./components/footer/footer";
-import ListMovie from "./components/list-movie/list-movie";
+import MovieCard from "./components/movie-card/movie-card";
 import Movie from "./components/movie/movie";
 import ModalForm from "./components/modal-form/modal-form";
 
@@ -24,7 +26,8 @@ container.appendChild(mainWrapper);
 const welcomeComponent = new WelcomeComponent();
 mainWrapper.appendChild(welcomeComponent.render());
 
-const listMovie = new ListMovie();
+const listMovies = movies.map(movie => new MovieCard(movie));
+console.log(listMovies)
 
 const footer = new Footer();
 container.appendChild(footer.render());
@@ -39,7 +42,7 @@ function renderRoute(path) {
             break;
         case "/list":
             mainWrapper.innerHTML = "";
-            mainWrapper.appendChild(listMovie.render());
+            mainWrapper.appendChild(listMovies.forEach( movie => movie.render()));
             break;
         default:
             mainWrapper.innerText = "404";
@@ -56,13 +59,3 @@ const movie = new Movie();
 container.appendChild(movie.render());
 
 const modalForm = new ModalForm();
-container.appendChild(modalForm.render());
-
-// const form = new LoginForm();
-// console.log(container)
-// container.appendChild(form.render());
-
-//
-// const list = new List();
-//container.appendChild(list.render());
-// const rootLayout = new layout({header, form})
