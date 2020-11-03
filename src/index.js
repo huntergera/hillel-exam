@@ -27,7 +27,6 @@ const welcomeComponent = new WelcomeComponent();
 mainWrapper.appendChild(welcomeComponent.render());
 
 const listMovies = movies.map(movie => new MovieCard(movie));
-console.log(listMovies)
 
 const footer = new Footer();
 container.appendChild(footer.render());
@@ -42,7 +41,7 @@ function renderRoute(path) {
             break;
         case "/list":
             mainWrapper.innerHTML = "";
-            mainWrapper.appendChild(listMovies.forEach( movie => movie.render()));
+            listMovies.forEach( movie => movie.render())
             break;
         default:
             mainWrapper.innerText = "404";

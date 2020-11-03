@@ -1,28 +1,33 @@
 import html from "./index.html";
 import "./style.scss";
 import {renderTemplate} from "../../template-utils";
-import movies from "../../movies.json"
 
 class ModalForm {
     constructor(movie) {
         this.form = renderTemplate(html, { movie } );
     }
 
-    render() {
-        document.body.appendChild(this.form);
-        this.hide();
-    }
+    hide(button) {
 
-    hide() {
         const closeModal = document.querySelectorAll(':scope .modal .close, .modal-backdrop');
         const modal = document.querySelector('#modal-form');
 
+        button.addEventListener('click', function () {
+            modal.remove();
+        })
+
         for (let button of closeModal) {
-            button.addEventListener('click', function () {
-                document.body.removeChild(modal);
-            })
         }
     }
+
+    render() {
+        document.body.appendChild(this.form);
+        const closeModal = document.querySelector(':scope .modal .close');
+
+        this.hide(closeModal);
+        //this.hide(modalBackdrop);
+    }
+
 }
 
 export default ModalForm;

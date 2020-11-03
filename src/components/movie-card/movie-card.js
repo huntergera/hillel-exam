@@ -1,21 +1,19 @@
 import html from "./index.html";
 import "./style.scss";
-import {renderTemplate} from "../../template-utils";
+import template from "lodash.template";
 import {getHistory} from "../../app-history";
 import ModalForm from "../modal-form/modal-form";
 
 const history = getHistory();
+const renderTemplate = template(html);
 
 class MovieCard {
     constructor(movie) {
-        // this.id = movie.id || "",
-        // this.image = movie.image || "";
-        // this.title = movie.title || "";
-        // this.description = movie.description || "";
-        // this.rating = movie.rating || "";
-
-        this.movie = {};
-        this.movieCard = renderTemplate(html, { movie } );
+        this.id = movie.id || "";
+        this.image = movie.image || "";
+        this.title = movie.title || "";
+        this.text = movie.text || "";
+        this.rating = movie.rating || "";
     }
 
     filmOpen(event) {
@@ -26,33 +24,33 @@ class MovieCard {
     }
 
     editFilm() {
+        console.log(1)
         const editMovie = new ModalForm();
         editMovie.render();
     }
 
     render() {
-        // const t = templateRenderer({
-        //     id: this.id,
-        //     image: this.image,
-        //     title: this.title,
-        //     description: this.description,
-        //     rating: this.rating
-        // })
-        //const main = document.querySelector("main");
+        const cardElements = renderTemplate({
+            id: this.id,
+            image: this.image,
+            title: this.title,
+            text: this.text,
+            rating: this.rating
+        })
+        const main = document.querySelector("main");
 
         const container = document.createElement("div");
-        container.innerHTML = this.movieCard;
-        console.log(container)
-        console.log(this.movieCard)
-        //
-        // main.appendChild(container.firstChild);
+        container.innerHTML = cardElements;
+        main.appendChild(container.firstChild);
 
-        this.movieCard.addEventListener("click", this.filmOpen.bind(this));
+        //this.movieCard.addEventListener("click", this.filmOpen.bind(this));
+        const editButtons = document.querySelectorAll(":scope .card .btn-edit");
 
-        const editButton = this.movieCard.querySelector('.btn-edit');
-        editButton.addEventListener("click", this.editFilm());
+        editButtons.forEach(button => {
 
-        return container
+            button.addEventListener("click", this.editFilm.bind(this))
+        })
+
     }
 }
 
