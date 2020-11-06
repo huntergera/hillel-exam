@@ -55,6 +55,6 @@ history.listen(listener => {
 renderRoute(history.location.pathname);
 
 const movie = new Movie();
-container.appendChild(movie.render());
+// container.appendChild(movie.render());
 
 const modalForm = new ModalForm();

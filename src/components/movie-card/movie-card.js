@@ -30,7 +30,6 @@ class MovieCard {
     }
 
     editFilm() {
-        console.log(1)
         const editMovie = new ModalForm();
         editMovie.render();
     }

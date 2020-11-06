@@ -7,27 +7,21 @@ class ModalForm {
         this.form = renderTemplate(html, { movie } );
     }
 
-    hide(button) {
+    hide(event) {
+        //const hideButtons = this.form.querySelectors
 
-        const closeModal = document.querySelectorAll(':scope .modal .close, .modal-backdrop');
-        const modal = document.querySelector('#modal-form');
-
-        button.addEventListener('click', function () {
-            modal.remove();
-        })
-
-        for (let button of closeModal) {
+        if (!this.form.querySelector('.modal-dialog').contains(event.target)
+            || this.form.querySelector(".close").contains(event.target)
+        ) {
+            this.form.remove();
         }
     }
 
     render() {
         document.body.appendChild(this.form);
-        const closeModal = document.querySelector(':scope .modal .close');
 
-        this.hide(closeModal);
-        //this.hide(modalBackdrop);
+        this.form.addEventListener('click',  event => this.hide(event).bind(this))
     }
-
 }
 
 export default ModalForm;
