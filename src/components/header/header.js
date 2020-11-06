@@ -28,6 +28,7 @@ class Header {
     }
 
     render() {
+        console.log(typeof this.header)
         this.header.addEventListener("click", this.allFilmsOnClick.bind(this));
         this.header.addEventListener("click", this.addNewFilm.bind(this));
         return this.header;

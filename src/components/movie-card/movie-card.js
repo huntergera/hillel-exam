@@ -1,11 +1,10 @@
 import html from "./index.html";
 import "./style.scss";
-import template from "lodash.template";
+import {renderTemplate} from "../../template-utils";
 import {getHistory} from "../../app-history";
 import ModalForm from "../modal-form/modal-form";
 
 const history = getHistory();
-const renderTemplate = template(html);
 
 class MovieCard {
     constructor(movie) {
@@ -14,6 +13,13 @@ class MovieCard {
         this.title = movie.title || "";
         this.text = movie.text || "";
         this.rating = movie.rating || "";
+        this.movie = renderTemplate(html,{
+            id: this.id,
+            image: this.image,
+            title: this.title,
+            text: this.text,
+            rating: this.rating
+        })
     }
 
     filmOpen(event) {
@@ -30,26 +36,11 @@ class MovieCard {
     }
 
     render() {
-        const cardElements = renderTemplate({
-            id: this.id,
-            image: this.image,
-            title: this.title,
-            text: this.text,
-            rating: this.rating
-        })
         const main = document.querySelector("main");
+        main.appendChild(this.movie);
 
-        const container = document.createElement("div");
-        container.innerHTML = cardElements;
-        main.appendChild(container.firstChild);
-
-        //this.movieCard.addEventListener("click", this.filmOpen.bind(this));
-        const editButtons = document.querySelectorAll(":scope .card .btn-edit");
-
-        editButtons.forEach(button => {
-
-            button.addEventListener("click", this.editFilm.bind(this))
-        })
+        const editButton = this.movie.querySelector(".btn-edit");
+        editButton.addEventListener("click", this.editFilm.bind(this))
 
     }
 }
