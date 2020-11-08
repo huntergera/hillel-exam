@@ -1,5 +1,4 @@
 import html from "./index.html";
-import $ from 'jquery';
 import "./style.scss";
 import {renderTemplate} from "../../template-utils";
 import { getHistory } from "../../app-history";
@@ -12,24 +11,24 @@ class Header {
         this.header = renderTemplate(html);
     }
 
-    allFilmsOnClick(event) {
-        if (event.target.dataset.id === "all-movies"){
-            event.preventDefault();
-            history.push(event.target.href);
-        }
+    showAllFilms(event) {
+        event.preventDefault();
+        history.push(event.target.href);
     }
 
     addNewFilm(event) {
-        if (event.target.dataset.id === "new-movie"){
-            event.preventDefault();
-            const newMovie = new ModalForm();
-            newMovie.render();
-        }
+        event.preventDefault();
+        const newMovie = new ModalForm();
+        newMovie.render();
     }
 
     render() {
-        this.header.addEventListener("click", this.allFilmsOnClick.bind(this));
-        this.header.addEventListener("click", this.addNewFilm.bind(this));
+        const allFilmsButton = this.header.querySelector(".all-movies");
+        allFilmsButton.addEventListener("click", this.showAllFilms)
+
+        const addNewFilmButton = this.header.querySelector(".add-new-film");
+        addNewFilmButton.addEventListener("click", this.addNewFilm)
+
         return this.header;
     }
 }

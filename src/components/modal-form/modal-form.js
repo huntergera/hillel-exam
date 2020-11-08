@@ -8,10 +8,9 @@ class ModalForm {
     }
 
     hide(event) {
-        //const hideButtons = this.form.querySelectors
-
         if (!this.form.querySelector('.modal-dialog').contains(event.target)
             || this.form.querySelector(".close").contains(event.target)
+            || event.target.hasAttribute('data-dismiss')
         ) {
             this.form.remove();
         }
@@ -20,7 +19,7 @@ class ModalForm {
     render() {
         document.body.appendChild(this.form);
 
-        this.form.addEventListener('click',  event => this.hide(event).bind(this))
+        this.form.addEventListener('click',  event => this.hide(event))
     }
 }
 

@@ -16,7 +16,7 @@ import ModalForm from "./components/modal-form/modal-form";
 
 const container = document.querySelector(".container");
 const mainWrapper = document.createElement("main");
-mainWrapper.className = "d-flex flex-wrap justify-content-around align-items-start align-content-start";
+mainWrapper.className = "d-flex flex-wrap justify-content-around align-content-start";
 mainWrapper.id = "content";
 
 const header = new Header();
@@ -55,6 +55,6 @@ history.listen(listener => {
 renderRoute(history.location.pathname);
 
 const movie = new Movie();
-// container.appendChild(movie.render());
+//container.appendChild(movie.render());
 
 const modalForm = new ModalForm();

@@ -22,11 +22,14 @@ class MovieCard {
         })
     }
 
-    filmOpen(event) {
-        if (event.target.dataset.id === "more"){
-            event.preventDefault();
-            history.push(event.target.href);
-        }
+    openFilm(event) {
+        event.preventDefault();
+        console.log("Open film")
+    }
+
+    deleteFilm(event) {
+        event.preventDefault();
+        console.log("Delete film")
     }
 
     editFilm() {
@@ -40,6 +43,12 @@ class MovieCard {
 
         const editButton = this.movie.querySelector(".btn-edit");
         editButton.addEventListener("click", this.editFilm.bind(this))
+
+        const openButton = this.movie.querySelector(".more");
+        openButton.addEventListener("click", this.openFilm.bind(this))
+
+        const deleteButton = this.movie.querySelector(".btn-delete");
+        deleteButton.addEventListener("click", this.deleteFilm.bind(this))
 
     }
 }
