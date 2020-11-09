@@ -7,12 +7,16 @@ import { getHistory } from "./app-history";
 import "./assets/style.scss";
 import movies from "./movies.json";
 
+import LocalStorage from "./components/localstorage/localstorage";
 import Header from "./components/header/header";
 import WelcomeComponent from "./components/welcome-component/welcome-component";
 import Footer from "./components/footer/footer";
 import MovieCard from "./components/movie-card/movie-card";
 import Movie from "./components/movie/movie";
 import ModalForm from "./components/modal-form/modal-form";
+
+const moviesArray = new LocalStorage();
+console.log(moviesArray.render())
 
 const container = document.querySelector(".container");
 const mainWrapper = document.createElement("main");
