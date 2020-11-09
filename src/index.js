@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { getHistory } from "./app-history";
 
 import "./assets/style.scss";
-import movies from "./movies.json";
 
 import LocalStorage from "./components/localstorage/localstorage";
 import Header from "./components/header/header";
@@ -15,8 +14,8 @@ import MovieCard from "./components/movie-card/movie-card";
 import Movie from "./components/movie/movie";
 import ModalForm from "./components/modal-form/modal-form";
 
-const moviesArray = new LocalStorage();
-console.log(moviesArray.render())
+const movies = new LocalStorage();
+const moviesArray = movies.render()
 
 const container = document.querySelector(".container");
 const mainWrapper = document.createElement("main");
@@ -30,7 +29,7 @@ container.appendChild(mainWrapper);
 const welcomeComponent = new WelcomeComponent();
 mainWrapper.appendChild(welcomeComponent.render());
 
-const listMovies = movies.map(movie => new MovieCard(movie));
+const listMovies = moviesArray.map(movie => new MovieCard(movie));
 
 const footer = new Footer();
 container.appendChild(footer.render());
