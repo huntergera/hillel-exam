@@ -25,6 +25,7 @@ class MovieCard {
     openFilm(event) {
         event.preventDefault();
         console.log("Open film")
+        history.push(event.target.href);
     }
 
     deleteFilm(event) {

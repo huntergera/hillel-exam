@@ -13,9 +13,10 @@ import Footer from "./components/footer/footer";
 import MovieCard from "./components/movie-card/movie-card";
 import Movie from "./components/movie/movie";
 import ModalForm from "./components/modal-form/modal-form";
+import NotFound from "./components/not-found-404/not-found-404";
 
 const movies = new LocalStorage();
-const moviesArray = movies.render()
+const moviesArray = movies.render();
 
 const container = document.querySelector(".container");
 const mainWrapper = document.createElement("main");
@@ -34,21 +35,46 @@ const listMovies = moviesArray.map(movie => new MovieCard(movie));
 const footer = new Footer();
 container.appendChild(footer.render());
 
+const notFound = new NotFound();
+
 const history = getHistory();
 
 function renderRoute(path) {
-    switch (path) {
-        case "/":
+    // switch (path) {
+    //     case "/":
+    //         mainWrapper.innerHTML = "";
+    //         mainWrapper.appendChild(welcomeComponent.render());
+    //         break;
+    //     case "/list":
+    //         mainWrapper.innerHTML = "";
+    //         listMovies.forEach( movie => movie.render())
+    //         break;
+    //     default:
+    //         mainWrapper.innerHTML = "";
+    //         mainWrapper.appendChild(notFound.render());
+    //         break;
+    // }
+
+    if (path === "/") {
+        mainWrapper.innerHTML = "";
+        mainWrapper.appendChild(welcomeComponent.render());
+    } else if (path === "/list") {
+        mainWrapper.innerHTML = "";
+        listMovies.forEach( movie => movie.render())
+    } else if (path.startsWith("/list/")) {
+        const id = path.substr("/list/".length)
+        if (id) {
+            //console.log(movie)
+            const currentMovie = moviesArray.find(movie => movie.id === id)
+            const movie = new Movie(currentMovie);
+            console.log(currentMovie)
+            //console.log(movie.render(currentMovie))
             mainWrapper.innerHTML = "";
-            mainWrapper.appendChild(welcomeComponent.render());
-            break;
-        case "/list":
-            mainWrapper.innerHTML = "";
-            listMovies.forEach( movie => movie.render())
-            break;
-        default:
-            mainWrapper.innerText = "404";
-            break;
+            mainWrapper.appendChild(movie.render())
+        }
+    } else {
+        mainWrapper.innerHTML = "";
+        mainWrapper.appendChild(notFound.render());
     }
 }
 
@@ -57,7 +83,6 @@ history.listen(listener => {
 });
 renderRoute(history.location.pathname);
 
-const movie = new Movie();
 //container.appendChild(movie.render());
 
 const modalForm = new ModalForm();
