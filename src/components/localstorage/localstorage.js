@@ -1,4 +1,4 @@
-import movies from "../../movies.json"
+import moviesArray from "../../movies.json"
 
 class LocalStorage {
     constructor() {
@@ -17,9 +17,9 @@ class LocalStorage {
         if (this.getFilmsFromLocalStorage() !== null) {
             this.movies = this.getFilmsFromLocalStorage()
         } else {
-            this.movies = movies;
-            const moviesArray = JSON.stringify(movies);
-            localStorage.setItem('movies', moviesArray);
+            this.movies = moviesArray;
+            const movies = JSON.stringify(moviesArray);
+            localStorage.setItem('movies', movies);
         }
 
         return this.movies;
