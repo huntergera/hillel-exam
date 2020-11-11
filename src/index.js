@@ -47,8 +47,8 @@ function renderRoute(path) {
     } else if (path === "/list") {
         mainWrapper.innerHTML = "";
         listMovies.forEach( movie =>  mainWrapper.appendChild(movie.render()))
-    } else if (path.startsWith("/list/")) {
-        const id = path.substr("/list/".length)
+    } else if (path.startsWith("/list-")) {
+        const id = path.substr("/list-".length)
         if (id) {
             //console.log(movie)
             const currentMovie = moviesArray.find(movie => movie.id === id)
