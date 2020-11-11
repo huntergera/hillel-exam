@@ -37,8 +37,7 @@ class Movie {
     }
 
     render() {
-        const main = document.querySelector("main");
-        main.appendChild(this.movie);
+        return this.movie
     }
 }
 

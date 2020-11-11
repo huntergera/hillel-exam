@@ -40,27 +40,13 @@ const notFound = new NotFound();
 const history = getHistory();
 
 function renderRoute(path) {
-    // switch (path) {
-    //     case "/":
-    //         mainWrapper.innerHTML = "";
-    //         mainWrapper.appendChild(welcomeComponent.render());
-    //         break;
-    //     case "/list":
-    //         mainWrapper.innerHTML = "";
-    //         listMovies.forEach( movie => movie.render())
-    //         break;
-    //     default:
-    //         mainWrapper.innerHTML = "";
-    //         mainWrapper.appendChild(notFound.render());
-    //         break;
-    // }
 
     if (path === "/") {
         mainWrapper.innerHTML = "";
         mainWrapper.appendChild(welcomeComponent.render());
     } else if (path === "/list") {
         mainWrapper.innerHTML = "";
-        listMovies.forEach( movie => movie.render())
+        listMovies.forEach( movie =>  mainWrapper.appendChild(movie.render()))
     } else if (path.startsWith("/list/")) {
         const id = path.substr("/list/".length)
         if (id) {

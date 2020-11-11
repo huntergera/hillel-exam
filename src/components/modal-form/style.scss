@@ -1,0 +1,14 @@
+.btn-add-field,
+.btn-remove-field {
+  width: 100%;
+  height: 38px;
+}
+.btn-add-field svg {
+  margin-top: -2px;
+}
+.btn-edit:hover svg,
+.btn-delete:hover svg,
+.btn-add-field:hover svg,
+.btn-remove-field:hover svg{
+  fill: #ffffff;
+}

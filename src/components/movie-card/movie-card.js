@@ -39,9 +39,6 @@ class MovieCard {
     }
 
     render() {
-        const main = document.querySelector("main");
-        main.appendChild(this.movie);
-
         const editButton = this.movie.querySelector(".btn-edit");
         editButton.addEventListener("click", this.editFilm.bind(this))
 
@@ -51,6 +48,7 @@ class MovieCard {
         const deleteButton = this.movie.querySelector(".btn-delete");
         deleteButton.addEventListener("click", this.deleteFilm.bind(this))
 
+        return this.movie
     }
 }
 
