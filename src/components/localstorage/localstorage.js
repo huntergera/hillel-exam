@@ -22,7 +22,6 @@ function getFilms() {
 }
 
 function setFilmsToLocalStorage(array) {
-    console.log(array)
     const moviesJson = JSON.stringify(array);
     localStorage.setItem('movies', moviesJson);
 }
