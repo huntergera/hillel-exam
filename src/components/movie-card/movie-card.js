@@ -11,8 +11,18 @@ class MovieCard {
         this.id = movie.id || "";
         this.image = movie.image || "";
         this.title = movie.title || "";
+        this.titleOriginal = movie.titleOriginal || "";
         this.text = movie.text || "";
         this.rating = movie.rating || "";
+        this.year = movie.year || "";
+        this.country = movie.country || "";
+        this.slogan = movie.slogan || "";
+        this.director = movie.director || "";
+        this.producer = movie.producer || "";
+        this.scenario = movie.scenario || "";
+        this.roles = movie.roles || "";
+        this.operator = movie.operator || "";
+        this.composer = movie.composer || "";
         this.movie = renderTemplate(html,{
             id: this.id,
             image: this.image,
@@ -33,7 +43,23 @@ class MovieCard {
     }
 
     editFilm() {
-        const editMovie = new ModalForm();
+        const editMovie = new ModalForm({
+            id: this.id,
+            title: this.title,
+            titleOriginal: this.titleOriginal,
+            image: this.image,
+            text: this.text,
+            rating: this.rating,
+            year: this.year,
+            country: this.country,
+            slogan: this.slogan,
+            director: this.director,
+            producer: this.producer,
+            scenario: this.scenario,
+            roles: this.roles,
+            operator: this.operator,
+            composer: this.composer
+        });
         editMovie.render();
     }
 
