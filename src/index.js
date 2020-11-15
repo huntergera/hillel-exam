@@ -6,7 +6,7 @@ import { getHistory } from "./app-history";
 
 import "./assets/style.scss";
 
-import getFilmsFromLocalStorage from "./components/localstorage/localstorage";
+import { getFilms } from "./components/localstorage/localstorage";
 import Header from "./components/header/header";
 import WelcomeComponent from "./components/welcome-component/welcome-component";
 import Footer from "./components/footer/footer";
@@ -15,7 +15,7 @@ import Movie from "./components/movie/movie";
 import ModalForm from "./components/modal-form/modal-form";
 import NotFound from "./components/not-found-404/not-found-404";
 
-const movies = getFilmsFromLocalStorage();
+const movies = getFilms();
 
 const container = document.querySelector(".container");
 const mainWrapper = document.createElement("main");
@@ -28,8 +28,6 @@ container.appendChild(mainWrapper);
 
 const welcomeComponent = new WelcomeComponent();
 mainWrapper.appendChild(welcomeComponent.render());
-
-
 
 const footer = new Footer();
 container.appendChild(footer.render());
@@ -64,7 +62,5 @@ history.listen(listener => {
     renderRoute(listener.location.pathname);
 });
 renderRoute(history.location.pathname);
-
-//container.appendChild(movie.render());
 
 const modalForm = new ModalForm();

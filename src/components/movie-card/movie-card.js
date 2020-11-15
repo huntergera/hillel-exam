@@ -3,6 +3,7 @@ import "./style.scss";
 import {renderTemplate} from "../../template-utils";
 import {getHistory} from "../../app-history";
 import ModalForm from "../modal-form/modal-form";
+import { getFilms, setFilmsToLocalStorage } from "../localstorage/localstorage";
 
 const history = getHistory();
 
@@ -29,7 +30,15 @@ class MovieCard {
 
     deleteFilm(event) {
         event.preventDefault();
-        console.log("Delete film")
+        console.log("Delete film", this.id)
+
+        const filmsArray = getFilms();
+        const newFilmsArray = filmsArray.filter( movie => movie.id !== this.id);
+
+        console.log('films' , filmsArray)
+        console.log('new films', newFilmsArray)
+
+        setFilmsToLocalStorage(newFilmsArray);
     }
 
     editFilm() {
