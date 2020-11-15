@@ -1,29 +1,25 @@
 import moviesArray from "../../movies.json"
 
-class LocalStorage {
-    constructor() {
-        this.movies;
-    }
-
-    getFilmsFromLocalStorage() {
-        try {
-            return JSON.parse(localStorage.getItem('movies'));
-        } catch (e) {
-            return [];
-        }
-    }
-
-    render() {
-        if (this.getFilmsFromLocalStorage() !== null) {
-            this.movies = this.getFilmsFromLocalStorage()
-        } else {
-            this.movies = moviesArray;
-            const movies = JSON.stringify(moviesArray);
-            localStorage.setItem('movies', movies);
-        }
-
-        return this.movies;
+function getFilmsFromLocalStorage() {
+    try {
+        return JSON.parse(localStorage.getItem('movies'));
+    } catch (e) {
+        return [];
     }
 }
 
-export default LocalStorage;
+function getFilms() {
+    let movies = [];
+
+    if (getFilmsFromLocalStorage() !== null) {
+        movies = getFilmsFromLocalStorage()
+    } else {
+        movies = moviesArray;
+        const movies = JSON.stringify(moviesArray);
+        localStorage.setItem('movies', movies);
+    }
+
+    return movies;
+}
+
+export default getFilms;

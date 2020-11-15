@@ -6,7 +6,7 @@ import { getHistory } from "./app-history";
 
 import "./assets/style.scss";
 
-import LocalStorage from "./components/localstorage/localstorage";
+import getFilmsFromLocalStorage from "./components/localstorage/localstorage";
 import Header from "./components/header/header";
 import WelcomeComponent from "./components/welcome-component/welcome-component";
 import Footer from "./components/footer/footer";
@@ -15,8 +15,7 @@ import Movie from "./components/movie/movie";
 import ModalForm from "./components/modal-form/modal-form";
 import NotFound from "./components/not-found-404/not-found-404";
 
-const movies = new LocalStorage();
-const moviesArray = movies.render();
+const movies = getFilmsFromLocalStorage();
 
 const container = document.querySelector(".container");
 const mainWrapper = document.createElement("main");
@@ -30,7 +29,7 @@ container.appendChild(mainWrapper);
 const welcomeComponent = new WelcomeComponent();
 mainWrapper.appendChild(welcomeComponent.render());
 
-const listMovies = moviesArray.map(movie => new MovieCard(movie));
+
 
 const footer = new Footer();
 container.appendChild(footer.render());
@@ -40,22 +39,19 @@ const notFound = new NotFound();
 const history = getHistory();
 
 function renderRoute(path) {
-
     if (path === "/") {
         mainWrapper.innerHTML = "";
         mainWrapper.appendChild(welcomeComponent.render());
     } else if (path === "/list") {
         mainWrapper.innerHTML = "";
+        const listMovies = movies.map(movie => new MovieCard(movie));
         listMovies.forEach( movie =>  mainWrapper.appendChild(movie.render()))
     } else if (path.startsWith("/list-")) {
         const id = path.substr("/list-".length)
         if (id) {
-            //console.log(movie)
-            const currentMovie = moviesArray.find(movie => movie.id === id)
-            const movie = new Movie(currentMovie);
-            console.log(currentMovie)
-            //console.log(movie.render(currentMovie))
             mainWrapper.innerHTML = "";
+            const currentMovie = movies.find(movie => movie.id === id)
+            const movie = new Movie(currentMovie);
             mainWrapper.appendChild(movie.render())
         }
     } else {
