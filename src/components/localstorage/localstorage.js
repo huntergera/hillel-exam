@@ -14,8 +14,7 @@ function getFilms() {
     if (getFilmsFromLocalStorage() !== null) {
         movies = getFilmsFromLocalStorage()
     } else {
-        movies = moviesArray;
-        const movies = JSON.stringify(moviesArray);
+        movies = JSON.stringify(moviesArray);
         localStorage.setItem('movies', movies);
     }
 
