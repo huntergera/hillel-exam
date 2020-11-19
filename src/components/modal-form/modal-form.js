@@ -1,21 +1,22 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import html from "./index.html";
 import "./style.scss";
 import {renderTemplate} from "../../template-utils";
 import { getFilms, setFilmsToLocalStorage } from "../localstorage/localstorage";
 
 class ModalForm {
-    constructor(movie) {
+    constructor(props) {
         this.form = renderTemplate(html);
-        this.movie = movie || "";
+        this.onEdited = props.newMovieConfirmed || props.movieEdited;
+        this.movie = props.editedInfo || "";
     }
 
     hide(event) {
         if (!this.form.querySelector('.modal-dialog').contains(event.target)
             || this.form.querySelector(".close").contains(event.target)
-            || this.form.querySelector("#confirm").contains(event.target)
             || event.target.hasAttribute('data-dismiss')
         ) {
-            console.log(this.form)
             this.form.remove();
         }
     }
@@ -24,6 +25,7 @@ class ModalForm {
         event.preventDefault();
 
         const newFilm = Object.assign({}, {
+            id: uuidv4(),
             title: this.form.querySelector("#title").value || "-",
             titleOriginal: this.form.querySelector("#titleOriginal").value || "-",
             image: this.form.querySelector("#image").value || "https://dummyimage.com/177x265/000/fff.jpg&text=Coming+soon",
@@ -49,7 +51,8 @@ class ModalForm {
         }
 
         setFilmsToLocalStorage(filmsArray);
-        this.hide(event)
+        this.hide(event);
+        this.onEdited();
     }
 
     setInputsValue() {

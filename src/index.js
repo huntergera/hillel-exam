@@ -12,7 +12,6 @@ import WelcomeComponent from "./components/welcome-component/welcome-component";
 import Footer from "./components/footer/footer";
 import MovieCard from "./components/movie-card/movie-card";
 import Movie from "./components/movie/movie";
-import ModalForm from "./components/modal-form/modal-form";
 import NotFound from "./components/not-found-404/not-found-404";
 
 const movies = getFilms();
@@ -22,7 +21,7 @@ const mainWrapper = document.createElement("main");
 mainWrapper.className = "d-flex flex-wrap justify-content-around align-content-start";
 mainWrapper.id = "content";
 
-const header = new Header();
+const header = new Header({ newMovieConfirmed: rewriteMovies });
 container.appendChild(header.render());
 container.appendChild(mainWrapper);
 
@@ -42,7 +41,10 @@ function renderRoute(path) {
         mainWrapper.appendChild(welcomeComponent.render());
     } else if (path === "/list") {
         mainWrapper.innerHTML = "";
-        const listMovies = movies.map(movie => new MovieCard(movie));
+        const listMovies = movies.map(movie => new MovieCard({
+            movie: movie,
+            movieEdited: rewriteMovies
+        }));
         listMovies.forEach( movie =>  mainWrapper.appendChild(movie.render()))
     } else if (path.startsWith("/list-")) {
         const id = path.substr("/list-".length)
@@ -63,4 +65,12 @@ history.listen(listener => {
 });
 renderRoute(history.location.pathname);
 
-const modalForm = new ModalForm();
+function rewriteMovies() {
+    mainWrapper.innerHTML = "";
+    const movies = getFilms();
+    const listMovies = movies.map(movie => new MovieCard({
+        movie: movie,
+        movieEdited: rewriteMovies
+    }));
+    listMovies.forEach( movie =>  mainWrapper.appendChild(movie.render()))
+}

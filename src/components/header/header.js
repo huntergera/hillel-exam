@@ -7,8 +7,9 @@ import ModalForm from "../modal-form/modal-form";
 const history = getHistory();
 
 class Header {
-    constructor() {
+    constructor(props) {
         this.header = renderTemplate(html);
+        this.newMovieConfirmed = props.newMovieConfirmed;
     }
 
     showAllFilms(event) {
@@ -16,9 +17,10 @@ class Header {
         history.push(event.target.href);
     }
 
-    addNewFilm(event) {
+    addNewFilm = (event) => {
         event.preventDefault();
-        const newMovie = new ModalForm();
+
+        const newMovie = new ModalForm({ newMovieConfirmed: this.newMovieConfirmed});
         newMovie.render();
     }
 
