@@ -20,7 +20,10 @@ class Header {
     addNewFilm = (event) => {
         event.preventDefault();
 
-        const newMovie = new ModalForm({ newMovieConfirmed: this.newMovieConfirmed});
+        const newMovie = new ModalForm({
+            newMovieConfirmed: this.newMovieConfirmed,
+            modalTitle: "Добавить новый фильм"
+        });
         newMovie.render();
     }
 

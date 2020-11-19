@@ -10,6 +10,7 @@ class ModalForm {
         this.form = renderTemplate(html);
         this.onEdited = props.newMovieConfirmed || props.movieEdited;
         this.movie = props.editedInfo || "";
+        this.modalTitle = props.modalTitle;
     }
 
     hide(event) {
@@ -75,6 +76,8 @@ class ModalForm {
     render() {
         document.body.appendChild(this.form);
         this.setInputsValue();
+        this.form.querySelector(".modal-title").html = this.modalTitle
+
 
         this.form.addEventListener('click',  event => this.hide(event))
 
