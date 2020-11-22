@@ -40,7 +40,10 @@ class ModalForm {
             operator: this.form.querySelector("#operator").value || "-",
             composer: this.form.querySelector("#composer").value || "-",
             rating: this.form.querySelector("#rating").value || "-",
-            text: this.form.querySelector("#text").value || "-"
+            text: this.form.querySelector("#text").value || "-",
+            likePlus: 0,
+            likeMinus: 0,
+            isLiked:  false
         });
 
         const filmsArray = getFilms();

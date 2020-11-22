@@ -18,6 +18,9 @@ class Movie {
         this.producer = movie.producer || "";
         this.operator = movie.operator || "";
         this.composer = movie.composer || "";
+        this.likePlus = movie.likePlus || "";
+        this.likeMinus = movie.likeMinus || "";
+        this.isLiked = movie.isLiked || "";
         this.movie = renderTemplate(html,{
             id: this.id,
             image: this.image,
@@ -32,11 +35,28 @@ class Movie {
             scenario: this.scenario,
             producer: this.producer,
             operator: this.operator,
-            composer: this.composer
+            composer: this.composer,
+            likePlus: this.likePlus,
+            likeMinus: this.likeMinus,
+            isLiked: this.isLiked
         })
     }
 
+    addLike() {
+        const likeButtons = this.movie.querySelectorAll(".btn-text");
+
+        for(let button of likeButtons) {
+            button.addEventListener("click", (event) => {
+                if (button.contains(event.target)) {
+                    button.dataset.count++
+                }
+            })
+        }
+    }
+
     render() {
+        this.addLike();
+
         return this.movie
     }
 }
