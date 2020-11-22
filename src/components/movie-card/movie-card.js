@@ -67,7 +67,8 @@ class MovieCard {
                 roles: this.roles,
                 operator: this.operator,
                 composer: this.composer },
-            movieEdited: this.movieEdited
+            movieEdited: this.movieEdited,
+            modalTitle: "Редактировать фильм"
         });
         editMovie.render();
     }

@@ -11,6 +11,7 @@ class ModalForm {
         this.onEdited = props.newMovieConfirmed || props.movieEdited;
         this.movie = props.editedInfo || "";
         this.modalTitle = props.modalTitle;
+        console.log(this.modalTitle)
     }
 
     hide(event) {
@@ -56,7 +57,8 @@ class ModalForm {
         this.onEdited();
     }
 
-    setInputsValue() {
+    setValues() {
+        this.form.querySelector(".modal-title").innerHTML = this.modalTitle;
         this.form.querySelector("#title").value = this.movie.title || "";
         this.form.querySelector("#titleOriginal").value = this.movie.titleOriginal || "";
         this.form.querySelector("#image").value = this.movie.image || "";
@@ -75,9 +77,7 @@ class ModalForm {
 
     render() {
         document.body.appendChild(this.form);
-        this.setInputsValue();
-        this.form.querySelector(".modal-title").html = this.modalTitle
-
+        this.setValues();
 
         this.form.addEventListener('click',  event => this.hide(event))
 
