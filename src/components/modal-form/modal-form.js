@@ -11,7 +11,6 @@ class ModalForm {
         this.onEdited = props.newMovieConfirmed || props.movieEdited;
         this.movie = props.editedInfo || "";
         this.modalTitle = props.modalTitle;
-        console.log(this.modalTitle)
     }
 
     hide(event) {
@@ -30,7 +29,7 @@ class ModalForm {
             id: uuidv4(),
             title: this.form.querySelector("#title").value || "-",
             titleOriginal: this.form.querySelector("#titleOriginal").value || "-",
-            image: this.form.querySelector("#image").value || "https://dummyimage.com/177x265/000/fff.jpg&text=Coming+soon",
+            image: this.form.querySelector("#image").value || "https://dummyimage.com/210x290/000/fff.jpg&text=Coming+soon",
             year: this.form.querySelector("#year").value || "-",
             country: this.form.querySelector("#country").value || "-",
             slogan: this.form.querySelector("#slogan").value || "-",

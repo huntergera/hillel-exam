@@ -41,12 +41,15 @@ class MovieCard {
 
     deleteFilm(event) {
         event.preventDefault();
+        const confirmDeleteFilm = confirm("Вы точно хотите удалить этот фильм?");
 
-        const filmsArray = getFilms();
-        const newFilmsArray = filmsArray.filter( movie => movie.id !== this.id);
+        if (confirmDeleteFilm === true) {
+            const filmsArray = getFilms();
+            const newFilmsArray = filmsArray.filter( movie => movie.id !== this.id);
 
-        setFilmsToLocalStorage(newFilmsArray);
-        this.movieEdited();
+            setFilmsToLocalStorage(newFilmsArray);
+            this.movieEdited();
+        }
     }
 
     editFilm() {

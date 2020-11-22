@@ -50,6 +50,7 @@ function renderRoute(path) {
         const id = path.substr("/list-".length)
         if (id) {
             mainWrapper.innerHTML = "";
+            const movies = getFilms();
             const currentMovie = movies.find(movie => movie.id === id)
             const movie = new Movie(currentMovie);
             mainWrapper.appendChild(movie.render())
