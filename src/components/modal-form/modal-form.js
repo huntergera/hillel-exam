@@ -25,7 +25,7 @@ class ModalForm {
     confirmChanges(event) {
         event.preventDefault();
 
-        const newFilm = Object.assign({}, {
+        const newFilm = {
             id: uuidv4(),
             title: this.form.querySelector("#title").value || "-",
             titleOriginal: this.form.querySelector("#titleOriginal").value || "-",
@@ -40,11 +40,8 @@ class ModalForm {
             operator: this.form.querySelector("#operator").value || "-",
             composer: this.form.querySelector("#composer").value || "-",
             rating: this.form.querySelector("#rating").value || "-",
-            text: this.form.querySelector("#text").value || "-",
-            likePlus: 0,
-            likeMinus: 0,
-            isLiked:  false
-        });
+            text: this.form.querySelector("#text").value || "-"
+        };
 
         const filmsArray = getFilms();
         const filmEdited = filmsArray.find(movie => movie.id === this.movie.id);

@@ -6,7 +6,7 @@ import { getHistory } from "./app-history";
 
 import "./assets/style.scss";
 
-import { getFilms } from "./components/localstorage/localstorage";
+import {getFilms, setFilmsToLocalStorage} from "./components/localstorage/localstorage";
 import Header from "./components/header/header";
 import WelcomeComponent from "./components/welcome-component/welcome-component";
 import Footer from "./components/footer/footer";
@@ -52,8 +52,13 @@ function renderRoute(path) {
             mainWrapper.innerHTML = "";
             const movies = getFilms();
             const currentMovie = movies.find(movie => movie.id === id)
-            const movie = new Movie(currentMovie);
-            mainWrapper.appendChild(movie.render())
+            if (currentMovie) {
+                const movie = new Movie(currentMovie);
+                mainWrapper.appendChild(movie.render())
+            } else {
+                mainWrapper.innerHTML = "";
+                mainWrapper.appendChild(notFound.render());
+            }
         }
     } else {
         mainWrapper.innerHTML = "";
