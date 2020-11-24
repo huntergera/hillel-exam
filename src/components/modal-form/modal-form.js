@@ -4,6 +4,7 @@ import html from "./index.html";
 import "./style.scss";
 import {renderTemplate} from "../../template-utils";
 import { getFilms, setFilmsToLocalStorage } from "../localstorage/localstorage";
+import {setEditedFilmsToLocalStorage} from "../../localstorage-utils";
 
 class ModalForm {
     constructor(props) {
@@ -43,15 +44,11 @@ class ModalForm {
             text: this.form.querySelector("#text").value || "-"
         };
 
-        const filmsArray = getFilms();
-        const filmEdited = filmsArray.find(movie => movie.id === this.movie.id);
-        if (filmEdited) {
-            Object.assign(filmEdited, newFilm)
-        } else {
-            filmsArray.push(newFilm);
-        }
+        setEditedFilmsToLocalStorage({
+            film: newFilm,
+            id: this.movie.id
+        });
 
-        setFilmsToLocalStorage(filmsArray);
         this.hide(event);
         this.onEdited();
     }

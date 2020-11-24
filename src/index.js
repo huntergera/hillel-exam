@@ -6,7 +6,7 @@ import { getHistory } from "./app-history";
 
 import "./assets/style.scss";
 
-import {getFilms, setFilmsToLocalStorage} from "./components/localstorage/localstorage";
+import {getFilms} from "./components/localstorage/localstorage";
 import Header from "./components/header/header";
 import WelcomeComponent from "./components/welcome-component/welcome-component";
 import Footer from "./components/footer/footer";

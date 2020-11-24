@@ -2,7 +2,7 @@ import html from "./index.html";
 import "./style.scss";
 import {renderTemplate} from "../../template-utils";
 import {getFilms, setFilmsToLocalStorage} from "../localstorage/localstorage";
-import {v4 as uuidv4} from "uuid";
+import {setEditedFilmsToLocalStorage} from "../../localstorage-utils"
 
 class Movie {
     constructor(movie) {
@@ -64,15 +64,10 @@ class Movie {
 
                     this.setDisabledButtons(likeButtons);
 
-                    const filmsArray = getFilms();
-                    const filmEdited = filmsArray.find(movie => movie.id === this.id);
-                    if (filmEdited) {
-                        Object.assign(filmEdited, newFilm)
-                    } else {
-                        filmsArray.push(newFilm);
-                    }
-
-                    setFilmsToLocalStorage(filmsArray);
+                    setEditedFilmsToLocalStorage({
+                        film: newFilm,
+                        id: this.id
+                    });
                 }
             })
         }
