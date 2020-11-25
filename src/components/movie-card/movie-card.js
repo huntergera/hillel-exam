@@ -24,13 +24,7 @@ class MovieCard {
         this.roles = props.movie.roles || "";
         this.operator = props.movie.operator || "";
         this.composer = props.movie.composer || "";
-        this.movie = renderTemplate(html,{
-            id: this.id,
-            image: this.image,
-            title: this.title,
-            text: this.text,
-            rating: this.rating
-        })
+        this.movie = renderTemplate(html,props.movie)
         this.movieEdited = props.movieEdited
     }
 

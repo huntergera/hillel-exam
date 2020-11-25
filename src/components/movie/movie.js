@@ -23,25 +23,7 @@ class Movie {
         this.likePlus = movie.likePlus || 0;
         this.likeMinus = movie.likeMinus || 0;
         this.isLiked = movie.isLiked || "";
-        this.movie = renderTemplate(html,{
-            id: this.id,
-            image: this.image,
-            title: this.title,
-            titleOriginal: this.titleOriginal,
-            text: this.text,
-            rating: this.rating,
-            year: this.year,
-            country: this.country,
-            slogan: this.slogan,
-            director: this.director,
-            scenario: this.scenario,
-            producer: this.producer,
-            operator: this.operator,
-            composer: this.composer,
-            likePlus: this.likePlus,
-            likeMinus: this.likeMinus,
-            isLiked: this.isLiked
-        })
+        this.movie = renderTemplate(html,movie)
     }
 
     setDisabledButtons(likeButtons) {
