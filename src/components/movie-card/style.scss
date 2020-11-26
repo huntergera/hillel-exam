@@ -12,3 +12,14 @@
 	width: 32px;
 	height: 32px;
 }
+.card {
+	width: 100%;
+}
+@media only screen and (max-width: 767px) {
+	.btn-delete {
+		background: #dc3545;
+	}
+	.btn-edit {
+		background: #007bff;
+	}
+}

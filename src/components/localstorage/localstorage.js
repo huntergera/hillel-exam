@@ -21,4 +21,9 @@ function getFilms() {
     return movies;
 }
 
-export default getFilms;
+function setFilmsToLocalStorage(array) {
+    const moviesJson = JSON.stringify(array);
+    localStorage.setItem('movies', moviesJson);
+}
+
+export { getFilms, setFilmsToLocalStorage };

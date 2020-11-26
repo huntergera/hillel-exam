@@ -3,33 +3,29 @@ import "./style.scss";
 import {renderTemplate} from "../../template-utils";
 import {getHistory} from "../../app-history";
 import ModalForm from "../modal-form/modal-form";
+import { getFilms, setFilmsToLocalStorage } from "../localstorage/localstorage";
 
 const history = getHistory();
 
 class MovieCard {
-    constructor(movie) {
-        this.id = movie.id || "";
-        this.image = movie.image || "";
-        this.title = movie.title || "";
-        this.titleOriginal = movie.titleOriginal || "";
-        this.text = movie.text || "";
-        this.rating = movie.rating || "";
-        this.year = movie.year || "";
-        this.country = movie.country || "";
-        this.slogan = movie.slogan || "";
-        this.director = movie.director || "";
-        this.producer = movie.producer || "";
-        this.scenario = movie.scenario || "";
-        this.roles = movie.roles || "";
-        this.operator = movie.operator || "";
-        this.composer = movie.composer || "";
-        this.movie = renderTemplate(html,{
-            id: this.id,
-            image: this.image,
-            title: this.title,
-            text: this.text,
-            rating: this.rating
-        })
+    constructor(props) {
+        this.id = props.movie.id || "";
+        this.image = props.movie.image || "";
+        this.title = props.movie.title || "";
+        this.titleOriginal = props.movie.titleOriginal || "";
+        this.text = props.movie.text || "";
+        this.rating = props.movie.rating || "";
+        this.year = props.movie.year || "";
+        this.country = props.movie.country || "";
+        this.slogan = props.movie.slogan || "";
+        this.director = props.movie.director || "";
+        this.producer = props.movie.producer || "";
+        this.scenario = props.movie.scenario || "";
+        this.roles = props.movie.roles || "";
+        this.operator = props.movie.operator || "";
+        this.composer = props.movie.composer || "";
+        this.movie = renderTemplate(html,props.movie)
+        this.movieEdited = props.movieEdited
     }
 
     openFilm(event) {
@@ -39,26 +35,37 @@ class MovieCard {
 
     deleteFilm(event) {
         event.preventDefault();
-        console.log("Delete film")
+        const confirmDeleteFilm = confirm("Вы точно хотите удалить этот фильм?");
+
+        if (confirmDeleteFilm === true) {
+            const filmsArray = getFilms();
+            const newFilmsArray = filmsArray.filter( movie => movie.id !== this.id);
+
+            setFilmsToLocalStorage(newFilmsArray);
+            this.movieEdited();
+        }
     }
 
     editFilm() {
-        const editMovie = new ModalForm({
-            id: this.id,
-            title: this.title,
-            titleOriginal: this.titleOriginal,
-            image: this.image,
-            text: this.text,
-            rating: this.rating,
-            year: this.year,
-            country: this.country,
-            slogan: this.slogan,
-            director: this.director,
-            producer: this.producer,
-            scenario: this.scenario,
-            roles: this.roles,
-            operator: this.operator,
-            composer: this.composer
+        const editMovie = new ModalForm( {
+            editedInfo: {
+                id: this.id,
+                title: this.title,
+                titleOriginal: this.titleOriginal,
+                image: this.image,
+                text: this.text,
+                rating: this.rating,
+                year: this.year,
+                country: this.country,
+                slogan: this.slogan,
+                director: this.director,
+                producer: this.producer,
+                scenario: this.scenario,
+                roles: this.roles,
+                operator: this.operator,
+                composer: this.composer },
+            movieEdited: this.movieEdited,
+            modalTitle: "Редактировать фильм"
         });
         editMovie.render();
     }
