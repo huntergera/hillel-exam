@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import html from "./index.html";
 import "./style.scss";
 import {renderTemplate} from "../../template-utils";
-import { getFilms, setFilmsToLocalStorage } from "../localstorage/localstorage";
 import {setEditedFilmsToLocalStorage} from "../../localstorage-utils";
 
 class ModalForm {
@@ -41,7 +40,7 @@ class ModalForm {
             operator: this.form.querySelector("#operator").value || "-",
             composer: this.form.querySelector("#composer").value || "-",
             rating: this.form.querySelector("#rating").value || "-",
-            text: this.form.querySelector("#text").value || "-",
+            text: this.form.querySelector("#text").value || "",
             likePlus: 0,
             likeMinus: 0,
             isLiked: false
