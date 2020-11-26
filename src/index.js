@@ -36,12 +36,13 @@ const notFound = new NotFound();
 const history = getHistory();
 
 function renderRoute(path) {
+    const movies = getFilms();
+
     if (path === "/") {
         mainWrapper.innerHTML = "";
         mainWrapper.appendChild(welcomeComponent.render());
     } else if (path === "/list") {
         mainWrapper.innerHTML = "";
-        const movies = getFilms();
         const listMovies = movies.map(movie => new MovieCard({
             movie: movie,
             movieEdited: rewriteMovies
@@ -49,17 +50,14 @@ function renderRoute(path) {
         listMovies.forEach( movie =>  mainWrapper.appendChild(movie.render()))
     } else if (path.startsWith("/list-")) {
         const id = path.substr("/list-".length)
-        if (id) {
+        const currentMovie = movies.find(movie => movie.id === id)
+        if (currentMovie) {
             mainWrapper.innerHTML = "";
-            const movies = getFilms();
-            const currentMovie = movies.find(movie => movie.id === id)
-            if (currentMovie) {
-                const movie = new Movie(currentMovie);
-                mainWrapper.appendChild(movie.render())
-            } else {
-                mainWrapper.innerHTML = "";
-                mainWrapper.appendChild(notFound.render());
-            }
+            const movie = new Movie(currentMovie);
+            mainWrapper.appendChild(movie.render())
+        } else {
+            mainWrapper.innerHTML = "";
+            mainWrapper.appendChild(notFound.render());
         }
     } else {
         mainWrapper.innerHTML = "";
