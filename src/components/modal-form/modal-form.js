@@ -3,7 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 import html from "./index.html";
 import "./style.scss";
 import {renderTemplate} from "../../template-utils";
+import { getHistory } from "../../app-history";
 import {setEditedFilmsToLocalStorage} from "../../localstorage-utils";
+
+const history = getHistory();
 
 class ModalForm {
     constructor(props) {
@@ -53,6 +56,7 @@ class ModalForm {
 
         this.hide(event);
         this.onEdited();
+        history.push("/list");
     }
 
     setValues() {
