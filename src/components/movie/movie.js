@@ -1,7 +1,6 @@
 import html from "./index.html";
 import "./style.scss";
 import {renderTemplate} from "../../template-utils";
-import {getFilms, setFilmsToLocalStorage} from "../localstorage/localstorage";
 import {setEditedFilmsToLocalStorage} from "../../localstorage-utils"
 
 class Movie {
