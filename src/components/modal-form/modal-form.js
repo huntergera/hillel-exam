@@ -3,8 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 import html from "./index.html";
 import "./style.scss";
 import {renderTemplate} from "../../template-utils";
-import { getFilms, setFilmsToLocalStorage } from "../localstorage/localstorage";
+import { getHistory } from "../../app-history";
 import {setEditedFilmsToLocalStorage} from "../../localstorage-utils";
+
+const history = getHistory();
 
 class ModalForm {
     constructor(props) {
@@ -41,13 +43,11 @@ class ModalForm {
             operator: this.form.querySelector("#operator").value || "-",
             composer: this.form.querySelector("#composer").value || "-",
             rating: this.form.querySelector("#rating").value || "-",
-            text: this.form.querySelector("#text").value || "-",
+            text: this.form.querySelector("#text").value || "",
             likePlus: 0,
             likeMinus: 0,
             isLiked: false
         };
-
-        console.log(newFilm.roles)
 
         setEditedFilmsToLocalStorage({
             film: newFilm,
@@ -56,6 +56,7 @@ class ModalForm {
 
         this.hide(event);
         this.onEdited();
+        history.push("/list");
     }
 
     setValues() {
@@ -70,7 +71,6 @@ class ModalForm {
         this.form.querySelector("#producer").value = this.movie.producer || "";
         this.form.querySelector("#scenario").value = this.movie.scenario || "";
         this.form.querySelector("#roles").value = this.movie.roles || "";
-        console.log(typeof this.movie.roles, this.movie.roles )
         this.form.querySelector("#operator").value = this.movie.operator || "";
         this.form.querySelector("#composer").value = this.movie.composer || "";
         this.form.querySelector("#rating").value = this.movie.rating || "";
