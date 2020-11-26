@@ -14,7 +14,7 @@ import MovieCard from "./components/movie-card/movie-card";
 import Movie from "./components/movie/movie";
 import NotFound from "./components/not-found-404/not-found-404";
 
-const movies = getFilms();
+getFilms();
 
 const container = document.querySelector(".container");
 const mainWrapper = document.createElement("main");
@@ -37,6 +37,7 @@ const history = getHistory();
 
 function renderRoute(path) {
     const movies = getFilms();
+    let movieFound = false;
 
     if (path === "/") {
         mainWrapper.innerHTML = "";
@@ -59,6 +60,26 @@ function renderRoute(path) {
             mainWrapper.innerHTML = "";
             mainWrapper.appendChild(notFound.render());
         }
+    } else if (path === "/search-") {
+        mainWrapper.innerHTML = "";
+        const searchInput = document.querySelector("input[name=query]");
+        movies.forEach(movie => {
+            if ((movie.title.toLowerCase().indexOf(searchInput.value.toLowerCase()) + 1)) {
+                const currentMovie = new MovieCard({
+                    movie: movie,
+                    movieEdited: rewriteMovies
+                });
+                mainWrapper.appendChild(currentMovie.render())
+                movieFound = true;
+            }
+        });
+        if (!movieFound) {
+            mainWrapper.innerHTML = "";
+            const notFoundFilms = document.createElement("div");
+            notFoundFilms.innerText = "Не найдено ни одного совпадения";
+            notFoundFilms.classList.add("not-found-films");
+            mainWrapper.appendChild(notFoundFilms);
+        }
     } else {
         mainWrapper.innerHTML = "";
         mainWrapper.appendChild(notFound.render());
@@ -77,5 +98,5 @@ function rewriteMovies() {
         movie: movie,
         movieEdited: rewriteMovies
     }));
-    listMovies.forEach( movie =>  mainWrapper.appendChild(movie.render()))
+    listMovies.forEach( movie =>  mainWrapper.appendChild(movie.render()));
 }

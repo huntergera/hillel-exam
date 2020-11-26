@@ -14,7 +14,7 @@ class Header {
 
     showAllFilms(event) {
         event.preventDefault();
-        history.push(event.target.href);
+        history.push({ pathname: event.target.href, search: "" });
     }
 
     addNewFilm = (event) => {
@@ -27,12 +27,22 @@ class Header {
         newMovie.render();
     }
 
+    searchFilms = (event) => {
+        event.preventDefault();
+        const searchInput = this.header.querySelector("input[name=query]");
+        history.push({ pathname: "search-", search: `?query=${searchInput.value}` });
+        searchInput.value = "";
+    }
+
     render() {
         const allFilmsButton = this.header.querySelector(".all-movies");
         allFilmsButton.addEventListener("click", this.showAllFilms)
 
         const addNewFilmButton = this.header.querySelector(".add-new-film");
         addNewFilmButton.addEventListener("click", this.addNewFilm)
+
+        const searchFilmForm = this.header.querySelector("#search");
+        searchFilmForm.addEventListener("submit", this.searchFilms)
 
         return this.header;
     }
