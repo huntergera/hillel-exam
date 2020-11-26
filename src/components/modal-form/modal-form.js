@@ -37,12 +37,17 @@ class ModalForm {
             director: this.form.querySelector("#director").value || "-",
             producer: this.form.querySelector("#producer").value || "-",
             scenario: this.form.querySelector("#scenario").value || "-",
-            roles: this.form.querySelector("#roles").value || "-",
+            roles: this.form.querySelector("#roles").value.split(",") || "-",
             operator: this.form.querySelector("#operator").value || "-",
             composer: this.form.querySelector("#composer").value || "-",
             rating: this.form.querySelector("#rating").value || "-",
-            text: this.form.querySelector("#text").value || "-"
+            text: this.form.querySelector("#text").value || "-",
+            likePlus: 0,
+            likeMinus: 0,
+            isLiked: false
         };
+
+        console.log(newFilm.roles)
 
         setEditedFilmsToLocalStorage({
             film: newFilm,
@@ -65,6 +70,7 @@ class ModalForm {
         this.form.querySelector("#producer").value = this.movie.producer || "";
         this.form.querySelector("#scenario").value = this.movie.scenario || "";
         this.form.querySelector("#roles").value = this.movie.roles || "";
+        console.log(typeof this.movie.roles, this.movie.roles )
         this.form.querySelector("#operator").value = this.movie.operator || "";
         this.form.querySelector("#composer").value = this.movie.composer || "";
         this.form.querySelector("#rating").value = this.movie.rating || "";

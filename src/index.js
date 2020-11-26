@@ -41,6 +41,7 @@ function renderRoute(path) {
         mainWrapper.appendChild(welcomeComponent.render());
     } else if (path === "/list") {
         mainWrapper.innerHTML = "";
+        const movies = getFilms();
         const listMovies = movies.map(movie => new MovieCard({
             movie: movie,
             movieEdited: rewriteMovies
